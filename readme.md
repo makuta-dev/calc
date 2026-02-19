@@ -75,3 +75,7 @@ The resulting `calc` binary will be located in the `build` directory.
 * **Error Handling:** Returns `NaN` (Not a Number) if the parser fails to generate a valid root.
 * **Exiting:** In interactive mode, simply press `Enter` on an empty line to quit.
 
+### Author & License
+
+Maks Makuta © 2026  
+No License - fell free to use that code in any way you need

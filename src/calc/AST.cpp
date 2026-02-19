@@ -13,10 +13,10 @@ namespace calc {
         return m_value;
     }
 
-    CBinary::CBinary(const Word op, ASTNode* left, ASTNode* right) {
+    CBinary::CBinary(const Word op, NodePtr&& left, NodePtr&& right) {
         m_op = op;
-        m_left = left;
-        m_right = right;
+        m_left = std::move(left);
+        m_right = std::move(right);
     }
 
     float CBinary::evaluate() {

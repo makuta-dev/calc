@@ -1,6 +1,8 @@
 #ifndef CALC_AST_H
 #define CALC_AST_H
 
+#include <memory>
+
 #include "Word.h"
 
 namespace calc {
@@ -10,6 +12,8 @@ namespace calc {
 
         virtual float evaluate() = 0;
     };
+
+    using NodePtr = std::unique_ptr<ASTNode>;
 
     struct CNumber : ASTNode {
         explicit CNumber(float data);
@@ -22,15 +26,15 @@ namespace calc {
     };
 
     struct CBinary : ASTNode {
-        explicit CBinary(Word op, ASTNode* left, ASTNode* right);
+        explicit CBinary(Word op, NodePtr&& left, NodePtr&& right);
         ~CBinary() override = default;
 
         float evaluate() override;
 
     private:
         Word m_op;
-        ASTNode* m_left;
-        ASTNode* m_right;
+        NodePtr m_left;
+        NodePtr m_right;
     };
 
 }

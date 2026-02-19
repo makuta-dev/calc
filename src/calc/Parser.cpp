@@ -1,0 +1,57 @@
+#include "Parser.h"
+
+#include <iostream>
+#include <ostream>
+
+namespace calc {
+
+    Parser::Parser(const std::vector<Token>& tokens) {
+        m_tokens = tokens;
+        m_index = 0;
+    }
+
+    NodePtr Parser::getRoot() {
+        auto left = parseTerm();
+
+        while (isOk() && (current().word == Word::Plus || current().word == Word::Minus)) {
+            const auto op = current().word;
+            m_index++;
+            auto right = parseTerm();
+            left = std::make_unique<CBinary>(op,std::move(left),std::move(right));
+        }
+
+        return left;
+    }
+
+    NodePtr Parser::parseTerm() {
+        auto left = parseFactor();
+
+        while (isOk() && (current().word == Word::Asterisk || current().word == Word::Slash)) {
+            const auto op = current().word;
+            m_index++;
+            auto right = parseFactor();
+            left = std::make_unique<CBinary>(op,std::move(left),std::move(right));
+        }
+
+        return left;
+    }
+
+    NodePtr Parser::parseFactor() {
+        if (isOk() && current().word == Word::Number) {
+            const auto val = current().value;
+            m_index++;
+            return std::make_unique<CNumber>(val);
+        }
+
+        std::cout << "Catch: " << current() << std::endl;
+        throw std::logic_error("");
+    }
+
+    Token Parser::current() const {
+        return m_tokens[m_index];
+    }
+
+    bool Parser::isOk() const {
+        return m_index < m_tokens.size();
+    }
+}

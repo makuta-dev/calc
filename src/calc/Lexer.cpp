@@ -56,6 +56,12 @@ namespace calc {
             else if (ch() == '/') {
                 put({Word::Slash,0.f});
             }
+            else if (ch() == '(') {
+                put({Word::LeftParen,0.f});
+            }
+            else if (ch() == ')') {
+                put({Word::RightParen,0.f});
+            }
             else {
                 std::cerr << "Unknown character:" << ch() << std::endl;
             }

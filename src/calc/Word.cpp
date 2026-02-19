@@ -24,6 +24,12 @@ namespace calc {
             case Word::Asterisk:
                 value = "asterisk";
                 break;
+            case Word::LeftParen:
+                value = "lparen";
+                break;
+            case Word::RightParen:
+                value = "rparen";
+                break;
             default:
                 value = "UNKNOWN";
                 break;

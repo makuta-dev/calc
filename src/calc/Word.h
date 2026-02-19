@@ -8,6 +8,9 @@ namespace calc {
     enum class Word {
         Number,
 
+        LeftParen,
+        RightParen,
+
         Plus,       // +
         Minus,      // -
         Slash,      // /

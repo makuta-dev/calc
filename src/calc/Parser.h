@@ -14,6 +14,7 @@ namespace calc {
         NodePtr getRoot();
 
     private:
+        NodePtr parseExpression();
         NodePtr parseTerm();
         NodePtr parseFactor();
 

@@ -11,6 +11,10 @@ namespace calc {
     }
 
     NodePtr Parser::getRoot() {
+        return parseExpression();
+    }
+
+    NodePtr Parser::parseExpression(){
         auto left = parseTerm();
 
         while (isOk() && (current().word == Word::Plus || current().word == Word::Minus)) {
@@ -41,6 +45,15 @@ namespace calc {
             const auto val = current().value;
             m_index++;
             return std::make_unique<CNumber>(val);
+        }
+
+        if (isOk() && current().word == Word::LeftParen) {
+            m_index++;
+            auto expr = parseExpression();
+            if(isOk() && current().word == Word::RightParen) {
+                m_index++;
+            }
+            return expr;
         }
 
         std::cout << "Catch: " << current() << std::endl;

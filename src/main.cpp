@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 #include <string>
 
 #include "calc/Lexer.h"
@@ -15,16 +16,18 @@ float calculate(const std::string& input) {
     return std::numeric_limits<float>::quiet_NaN();
 }
 
-int main(int argc, char** argv) {
+int main(const int argc, const char** argv) {
     if (argc >= 2) {
         std::cout << calculate(argv[1]) << std::endl;
     } else {
         std::string input;
-        while (std::getline(std::cin, input)) {
+        while (true) {
+            std::cout << "> ";
+            std::getline(std::cin, input);
             if (input.empty()) {
                 break;
             }
-            std::cout << calculate(input) << std::endl;
+            std::cout << " = " << calculate(input) << std::endl;
         }
     }
     return 0;

@@ -52,8 +52,16 @@ namespace calc {
             auto expr = parseExpression();
             if(isOk() && current().word == Word::RightParen) {
                 m_index++;
+            }else {
+                throw std::logic_error("Missing ')'");
             }
             return expr;
+        }
+
+        if (isOk() && current().word == Word::Minus) {
+            m_index++;
+            auto expr = parseFactor();
+            return std::make_unique<CUnary>(Word::Minus,std::move(expr));
         }
 
         std::cout << "Catch: " << current() << std::endl;

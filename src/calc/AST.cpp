@@ -33,11 +33,31 @@ namespace calc {
                 case Word::Asterisk:
                     return left * right;
                 default:
-                    std::cout << "Bad operator" << std::endl;
+                    std::cout << "Bad binary operator" << std::endl;
                     break;
             }
         }
         std::cout << "Cannot evaluate: left or right values are NULL" << std::endl;
+        return -1.0f;
+    }
+
+    CUnary::CUnary(const Word op, NodePtr&& right) {
+        m_op = op;
+        m_right = std::move(right);
+    }
+
+    float CUnary::evaluate() {
+        if (m_right != nullptr) {
+            const float right = m_right->evaluate();
+            switch (m_op) {
+                case Word::Minus:
+                    return -right;
+                default:
+                    std::cout << "Bad unary operator" << std::endl;
+                    break;
+            }
+        }
+        std::cout << "Cannot evaluate: right value is NULL" << std::endl;
         return -1.0f;
     }
 

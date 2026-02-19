@@ -37,6 +37,17 @@ namespace calc {
         NodePtr m_right;
     };
 
+    struct CUnary : ASTNode {
+        explicit CUnary(Word op, NodePtr&& right);
+        ~CUnary() override = default;
+
+        float evaluate() override;
+
+    private:
+        Word m_op;
+        NodePtr m_right;
+    };
+
 }
 
 #endif //CALC_AST_H

@@ -9,6 +9,14 @@ A lightweight, high-performance math expression evaluator built in C++. It uses 
 * **Clean Output:** Uses standard base-10 formatting for results.
 * **Zero Dependencies:** Pure C++ using only the standard library.
 
+- Operators support:
+  - `+-*/`
+  - `!` (factorial)
+  - `^` (power)
+  - `%` (mod)
+  - `()`
+  - `-5` (negation supported)
+
 ---
 
 ## 🛠 Usage
@@ -75,7 +83,7 @@ The resulting `calc` binary will be located in the `build` directory.
 * **Error Handling:** Returns `NaN` (Not a Number) if the parser fails to generate a valid root.
 * **Exiting:** In interactive mode, simply press `Enter` on an empty line to quit.
 
-### Author & License
+## 👤 Author | ⚖️ License
 
 Maks Makuta © 2026  
 No License - fell free to use that code in any way you need

@@ -17,7 +17,7 @@ namespace calc {
         Asterisk,   // *
         Percent,    // %
         Power,      // ^
-        Factorial  // !
+        Factorial   // !
     };
 
     std::ostream& operator<<(std::ostream& os, const Word& word);

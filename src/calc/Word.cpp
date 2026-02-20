@@ -30,6 +30,15 @@ namespace calc {
             case Word::RightParen:
                 value = "rparen";
                 break;
+            case Word::Percent:
+                value = "percent";
+                break;
+            case Word::Power:
+                value = "power";
+                break;
+            case Word::Factorial:
+                value = "factorial";
+                break;
             default:
                 value = "UNKNOWN";
                 break;

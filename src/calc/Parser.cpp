@@ -30,7 +30,8 @@ namespace calc {
     NodePtr Parser::parseTerm() {
         auto left = parseFactor();
 
-        while (isOk() && (current().word == Word::Asterisk || current().word == Word::Slash)) {
+        while (isOk() && (current().word == Word::Asterisk || current().word == Word::Slash  ||
+            current().word == Word::Power || current().word == Word::Percent)) {
             const auto op = current().word;
             m_index++;
             auto right = parseFactor();
@@ -44,7 +45,13 @@ namespace calc {
         if (isOk() && current().word == Word::Number) {
             const auto val = current().value;
             m_index++;
-            return std::make_unique<CNumber>(val);
+            auto number = std::make_unique<CNumber>(val);
+            if (isOk() && current().word == Word::Factorial) {
+                const auto op = current().word;
+                m_index++;
+                return std::make_unique<CUnary>(op,std::move(number));
+            }
+            return number;
         }
 
         if (isOk() && current().word == Word::LeftParen) {

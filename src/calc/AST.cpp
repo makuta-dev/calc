@@ -1,5 +1,6 @@
 #include "AST.h"
 
+#include <cmath>
 #include <iostream>
 #include <ostream>
 
@@ -32,6 +33,10 @@ namespace calc {
                     return left / right;
                 case Word::Asterisk:
                     return left * right;
+                case Word::Power:
+                    return std::pow(left ,right);
+                case Word::Percent:
+                    return std::fmodf(left,right);
                 default:
                     std::cout << "Bad binary operator" << std::endl;
                     break;
@@ -46,12 +51,27 @@ namespace calc {
         m_right = std::move(right);
     }
 
+    float fact(const float n) {
+        const auto i = static_cast<long>(std::floor(n));
+        if (i <= 1) {
+            return 1.f;
+        }
+
+        int result = 1;
+        for (int j = 2; j <= i; j++) {
+            result *= j;
+        }
+        return static_cast<float>(result);
+    }
+
     float CUnary::evaluate() {
         if (m_right != nullptr) {
             const float right = m_right->evaluate();
             switch (m_op) {
                 case Word::Minus:
                     return -right;
+                case Word::Factorial:
+                    return fact(right);
                 default:
                     std::cout << "Bad unary operator" << std::endl;
                     break;

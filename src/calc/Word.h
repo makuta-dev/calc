@@ -15,6 +15,9 @@ namespace calc {
         Minus,      // -
         Slash,      // /
         Asterisk,   // *
+        Percent,    // %
+        Power,      // ^
+        Factorial  // !
     };
 
     std::ostream& operator<<(std::ostream& os, const Word& word);

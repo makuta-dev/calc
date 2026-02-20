@@ -56,6 +56,15 @@ namespace calc {
             else if (ch() == '/') {
                 put({Word::Slash,0.f});
             }
+            else if (ch() == '%') {
+                put({Word::Percent,0.f});
+            }
+            else if (ch() == '!') {
+                put({Word::Factorial,0.f});
+            }
+            else if (ch() == '^') {
+                put({Word::Power,0.f});
+            }
             else if (ch() == '(') {
                 put({Word::LeftParen,0.f});
             }
